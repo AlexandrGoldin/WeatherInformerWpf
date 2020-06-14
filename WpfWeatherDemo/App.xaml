@@ -1,0 +1,26 @@
+﻿<Application x:Class="WpfWeatherDemo.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:WpfWeatherDemo"
+             xmlns:utils="clr-namespace:WpfWeatherDemo.Utils"
+             xmlns:cnv="clr-namespace:WpfWeatherDemo.Converters"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <utils:ViewModelLocator x:Key="ViewModelLocator"/>
+            <cnv:DateTimeToDateConverter x:Key="DateTimeToDateConverter"/>
+            <cnv:WeatherIconConverter x:Key="WeatherIconConverter"/>
+            <DataTemplate x:Key="ForecastDataTemplate">
+                <Border Background="#FF0D2738">
+                    <StackPanel>
+                        <TextBlock Background="#FF1D4057" Foreground="#FFADB982" FontSize="16" Text="{Binding Date,Converter={StaticResource DateTimeToDateConverter}}"/>
+                        <TextBlock Background="#FF13344B" FontSize="16" Foreground="#FFADB982" Text="{Binding Date,StringFormat={}{0:H:mm}}"/>
+                        <Image Width="55" Height="50" Source="{Binding Path=IconID,Converter={StaticResource WeatherIconConverter}}" />
+                        <TextBlock   Background="#FF1D4057" FontSize="16" Text="{Binding Temperature, StringFormat={}{0:f0}°}" HorizontalAlignment="Center" Foreground="#FFAEBFAE" />
+                        <TextBlock  Background="#FF13344B" FontSize="16" Text="{Binding WindSpeed,StringFormat={}{0:F0} м/с }" HorizontalAlignment="Center" Foreground="#FFAEBFAE"/>
+                    </StackPanel>
+                </Border>
+            </DataTemplate>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
